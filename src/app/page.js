@@ -104,40 +104,42 @@ export default function Home() {
               >
                 ❱
               </div>
-              <ul className="grid grid-cols-2 gap-4">
-                {Array.from({ length: slidesToShow }).map((_, index) => {
-                  const slideIndex = (currentIndex + index) % totalSlides;
-                  return (
-                    <div>
-                      <li
-                        onClick={() =>
-                          router.push(`/product/${products[slideIndex]._id}`)
-                        }
-                        className="cursor-pointer"
-                        key={products[slideIndex]?._id}
-                      >
-                        <div>
-                          <img
-                            key={slideIndex}
-                            src={products[slideIndex]?.imageUrl}
-                            alt={`Sale Product Item ${index}`}
-                            className="object-cover object-center w-full min-h-40 rounded aspect-square"
-                          />
-                        </div>
-                        <div className="mt-3">
-                          <h3 className="font-medium text-gray-900">
-                            {products[slideIndex]?.name}
-                          </h3>
-                          <p className="mt-1 text-sm text-gray-800">
-                            ${products[slideIndex]?.price}{" "}
-                            <span className="text-red-700">{`(-${products[slideIndex]?.priceDrop}%) Off`}</span>
-                          </p>
-                        </div>
-                      </li>
-                    </div>
-                  );
-                })}
-              </ul>
+              {products && products.length > 0 ? (
+                <ul className="grid grid-cols-2 gap-4">
+                  {Array.from({ length: slidesToShow }).map((_, index) => {
+                    const slideIndex = (currentIndex + index) % totalSlides;
+                    return (
+                      <div>
+                        <li
+                          onClick={() =>
+                            router.push(`/product/${products[slideIndex]._id}`)
+                          }
+                          className="cursor-pointer"
+                          key={products[slideIndex]?._id}
+                        >
+                          <div>
+                            <img
+                              key={slideIndex}
+                              src={products[slideIndex]?.imageUrl}
+                              alt={`Sale Product Item ${index}`}
+                              className="object-cover object-center w-full min-h-40 rounded aspect-square"
+                            />
+                          </div>
+                          <div className="mt-3">
+                            <h3 className="font-medium text-gray-900">
+                              {products[slideIndex]?.name}
+                            </h3>
+                            <p className="mt-1 text-sm text-gray-800">
+                              ${products[slideIndex]?.price}{" "}
+                              <span className="text-red-700">{`(-${products[slideIndex]?.priceDrop}%) Off`}</span>
+                            </p>
+                          </div>
+                        </li>
+                      </div>
+                    );
+                  })}
+                </ul>
+              ) : null}
             </div>
           </div>
         </div>
