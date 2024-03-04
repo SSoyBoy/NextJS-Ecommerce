@@ -63,12 +63,9 @@ export default function Login() {
     }
   }
 
-  console.log("isAuthUser", isAuthUser);
-  console.log("User", user);
-
-  useEffect(() => {
-    if (isAuthUser) router.push("/");
-  }, [isAuthUser]);
+  // useEffect(() => {
+  //   if (isAuthUser) router.push("/");
+  // }, [isAuthUser]);
 
   return (
     <div className="bg-white relative">
