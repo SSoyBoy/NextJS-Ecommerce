@@ -6,7 +6,7 @@
 // };
 
 // const connectToDB = async () => {
-//   const connectionUrl = process.env.NEXT_PUBLIC_MONGODB_URL;
+//   const connectionUrl = process.env.NEXT_PUBLIC_MONGODB_URI;
 
 //   mongoose
 //     .connect(connectionUrl, configOptions)
@@ -22,7 +22,7 @@ import mongoose from "mongoose";
 
 const connectToDB = async () => {
   try {
-    const connectionUrl = process.env.NEXT_PUBLIC_MONGODB_URL;
+    const connectionUrl = process.env.NEXT_PUBLIC_MONGODB_URI;
 
     await mongoose.connect(connectionUrl, {
       useNewUrlParser: true,
