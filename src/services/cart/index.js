@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import dotenv from "dotenv";
 
 export const addToCart = async (formData) => {
   try {
@@ -20,16 +21,14 @@ export const addToCart = async (formData) => {
 };
 
 export const getAllCartItems = async (id) => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   try {
-    const res = await fetch(
-      `http://localhost:3000/api/cart/all-cart-items?id=${id}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${Cookies.get("token")}`,
-        },
-      }
-    );
+    const res = await fetch(`${apiUrl}/api/cart/all-cart-items?id=${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    });
 
     const data = await res.json();
 
