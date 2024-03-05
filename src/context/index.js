@@ -69,6 +69,9 @@ export default function GlobalState({ children }) {
       setUser({});
     }
   }, [Cookies]);
+  console.log("pathName", pathName);
+  console.log("protectedRoutes", protectedRoutes);
+  console.log("user", user);
 
   useEffect(() => {
     if (
@@ -79,8 +82,8 @@ export default function GlobalState({ children }) {
       Object.keys(user).length === 0 &&
       protectedRoutes.includes(pathName) > -1
     )
-      router.push("/");
-  }, [user, pathName]);
+      router.push("/login");
+  }, [pathName]);
 
   useEffect(() => {
     if (
