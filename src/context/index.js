@@ -72,15 +72,15 @@ export default function GlobalState({ children }) {
 
   useEffect(() => {
     if (
-      (pathName !== "/register" &&
-        !pathName.includes("product") &&
-        pathName !== "/" &&
-        user &&
-        Object.keys(user).length === 0) ||
-      protectedRoutes.includes(pathName)
+      pathName !== "/register" &&
+      !pathName.includes("product") &&
+      pathName !== "/" &&
+      user &&
+      Object.keys(user).length === 0 &&
+      protectedRoutes.indexOf(pathName) > -1
     )
       router.push("/login");
-  }, [pathName]);
+  }, [user, pathName]);
 
   useEffect(() => {
     if (
