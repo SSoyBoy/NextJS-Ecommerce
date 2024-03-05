@@ -84,10 +84,10 @@ export default function GlobalState({ children }) {
 
   useEffect(() => {
     if (
-      (user !== null &&
-        user &&
-        Object.keys(user).length > 0 &&
-        user?.role !== "admin") ||
+      user !== null &&
+      user &&
+      Object.keys(user).length > 0 &&
+      user?.role !== "admin" &&
       protectedAdminRoutes.indexOf(pathName) > -1
     )
       router.push("/unauthorized-page");
