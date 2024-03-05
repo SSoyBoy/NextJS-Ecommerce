@@ -15,7 +15,7 @@ export const initialCheckoutFormData = {
   isProcessing: true,
 };
 
-const protectedRoutes = ["cart", "checkout", "account", "orders", "admin-view"];
+const protectedRoutes = ["/cart", "/checkout", "/account", "/orders"];
 
 const protectedAdminRoutes = [
   "/admin-view",
@@ -69,28 +69,25 @@ export default function GlobalState({ children }) {
       setUser({});
     }
   }, [Cookies]);
-  console.log("pathName", pathName);
-  console.log("protectedRoutes", protectedRoutes);
-  console.log("user", user);
 
   useEffect(() => {
     if (
-      pathName !== "/register" &&
-      !pathName.includes("product") &&
-      pathName !== "/" &&
-      user &&
-      Object.keys(user).length === 0 &&
-      protectedRoutes.includes(pathName) > -1
+      (pathName !== "/register" &&
+        !pathName.includes("product") &&
+        pathName !== "/" &&
+        user &&
+        Object.keys(user).length === 0) ||
+      protectedRoutes.includes(pathName)
     )
       router.push("/login");
   }, [pathName]);
 
   useEffect(() => {
     if (
-      user !== null &&
-      user &&
-      Object.keys(user).length > 0 &&
-      user?.role !== "admin" &&
+      (user !== null &&
+        user &&
+        Object.keys(user).length > 0 &&
+        user?.role !== "admin") ||
       protectedAdminRoutes.indexOf(pathName) > -1
     )
       router.push("/unauthorized-page");

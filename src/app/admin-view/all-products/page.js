@@ -3,7 +3,6 @@
 
 // export default async function AdminAllProducts() {
 //   const allAdminProducts = await getAllAdminProducts();
-//   console.log("allAdminProducts<<<<<", allAdminProducts);
 //   return (
 //     <div>
 //       <CommonLisTing data={allAdminProducts && allAdminProducts.data} />
@@ -22,7 +21,6 @@ export default function AdminAllProducts() {
   useEffect(() => {
     const fetchData = async () => {
       const allAdminProducts = await getAllAdminProducts();
-      console.log("allAdminProducts<<<<<", allAdminProducts);
       setData(allAdminProducts && allAdminProducts.data);
     };
 

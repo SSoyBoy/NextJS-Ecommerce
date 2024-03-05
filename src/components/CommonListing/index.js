@@ -18,8 +18,6 @@ export default function CommonListing({ data }) {
     updateDisplayedData();
   }, [data, currentPage, productsPerPage]);
 
-  console.log("data", data);
-
   const updateDisplayedData = () => {
     const startIndex = (currentPage - 1) * productsPerPage;
     const endIndex = startIndex + productsPerPage;
