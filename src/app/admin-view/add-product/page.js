@@ -78,7 +78,7 @@ export default function AdminAddNewProduct() {
     setCurrentUpdatedProduct,
   } = useContext(GlobalContext);
 
-  console.log(currentUpdatedProduct);
+  console.log("currentUpdatedProduct", currentUpdatedProduct);
 
   const router = useRouter();
 

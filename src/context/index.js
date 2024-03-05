@@ -57,7 +57,7 @@ export default function GlobalState({ children }) {
   const pathName = usePathname();
 
   useEffect(() => {
-    console.log(Cookies.get("token"));
+    console.log("token", Cookies.get("token"));
     if (Cookies.get("token") !== undefined) {
       setIsAuthUser(true);
       const userData = JSON.parse(localStorage.getItem("user")) || {};

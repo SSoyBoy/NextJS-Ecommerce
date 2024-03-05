@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 
 export default function ProductButton({ item }) {
   const pathName = usePathname();
+  console.log("item", item);
 
   const {
     setCurrentUpdatedProduct,
