@@ -79,7 +79,7 @@ export default function GlobalState({ children }) {
       Object.keys(user).length === 0 &&
       protectedRoutes.includes(pathName) > -1
     )
-      router.push("/login");
+      router.push("/");
   }, [user, pathName]);
 
   useEffect(() => {
