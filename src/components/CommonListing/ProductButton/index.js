@@ -18,6 +18,7 @@ export default function ProductButton({ item }) {
     user,
     showCartModal,
     setShowCartModal,
+    currentUpdatedProduct,
   } = useContext(GlobalContext);
   const router = useRouter();
 
@@ -61,24 +62,14 @@ export default function ProductButton({ item }) {
   }
 
   const handleUpdate = () => {
-    console.log("item before push:", item);
     setCurrentUpdatedProduct(item);
+    console.log("currentUpdatedProduct", currentUpdatedProduct);
     router.push("/admin-view/add-product");
   };
 
   return isAdminView ? (
     <>
       <button
-        // onClick={async () => {
-        //   console.log("item before push:", item);
-        //   setCurrentUpdatedProduct(item);
-        //   try {
-        //     await router.push("/admin-view/add-product");
-        //     console.log("Navigation successful");
-        //   } catch (error) {
-        //     console.error("Lỗi khi điều hướng:", error);
-        //   }
-        // }}
         onClick={handleUpdate}
         className="mt-1.5 flex w-full justify-center bg-black hover:bg-gray-600 px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
       >
