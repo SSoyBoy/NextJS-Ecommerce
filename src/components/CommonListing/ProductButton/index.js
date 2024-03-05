@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 
 export default function ProductButton({ item }) {
   const pathName = usePathname();
-  console.log("item", item);
 
   const {
     setCurrentUpdatedProduct,
@@ -65,9 +64,11 @@ export default function ProductButton({ item }) {
     <>
       <button
         onClick={async () => {
+          console.log("item before push:", item);
           setCurrentUpdatedProduct(item);
           try {
             await router.push("/admin-view/add-product");
+            console.log("Navigation successful");
           } catch (error) {
             console.error("Lỗi khi điều hướng:", error);
           }
