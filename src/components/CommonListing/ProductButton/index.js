@@ -64,9 +64,13 @@ export default function ProductButton({ item }) {
   return isAdminView ? (
     <>
       <button
-        onClick={() => {
+        onClick={async () => {
           setCurrentUpdatedProduct(item);
-          router.push("/admin-view/add-product");
+          try {
+            await router.push("/admin-view/add-product");
+          } catch (error) {
+            console.error("Lỗi khi điều hướng:", error);
+          }
         }}
         className="mt-1.5 flex w-full justify-center bg-black hover:bg-gray-600 px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
       >
