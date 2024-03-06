@@ -20,7 +20,7 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -114,7 +114,8 @@ export default function AdminAddNewProduct() {
       sizes: cpySizes,
     });
   }
-
+  const pathName = usePathname();
+  console.log("pathName", pathName);
   console.log("formData", formData);
 
   async function handleAddProduct() {

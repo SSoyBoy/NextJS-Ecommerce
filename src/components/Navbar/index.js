@@ -131,10 +131,11 @@ export default function Navbar() {
 
   useEffect(() => {
     if (
-      pathName !== "/admin-view/add-product" &&
-      currentUpdatedProduct !== null
+      (console.log("currentUpdatedProduct useEffect", currentUpdatedProduct),
+      console.log("pathName useEffect", pathName),
+      pathName !== "/admin-view/add-product" && currentUpdatedProduct !== null)
     )
-      setCurrentUpdatedProduct(null);
+      setCurrentUpdatedProduct("aaaaaa");
   }, [pathName]);
 
   function handleLogout() {
