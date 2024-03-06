@@ -5,7 +5,7 @@ import { GlobalContext } from "@/context";
 import { addToCart } from "@/services/cart";
 import { deleteAProduct } from "@/services/product";
 import { usePathname, useRouter } from "next/navigation";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function ProductButton({ item }) {
@@ -61,23 +61,35 @@ export default function ProductButton({ item }) {
     console.log("res", res);
   }
 
+  const [test, setTest] = useState(null);
+
   useEffect(() => {
-    if (currentUpdatedProduct) {
-      router.push("/admin-view/add-product");
-    }
+    setTest(currentUpdatedProduct);
   }, [currentUpdatedProduct]);
 
+  const handleUpdateProduct = () => {
+    setCurrentUpdatedProduct(test);
+    if (test) {
+      router.push("/admin-view/add-product");
+    }
+    handleUpdate();
+  };
+
   const handleUpdate = () => {
+    console.log("aaaaaaaaa");
     setCurrentUpdatedProduct(item);
-    console.log("pathName", pathName);
-    console.log("currentUpdatedProduct", currentUpdatedProduct);
+    setTimeout(() => {
+      console.log("item", item);
+      console.log("pathName", pathName);
+      console.log("currentUpdatedProduct>>>>>>>>>>>>", currentUpdatedProduct);
+    }, 3000);
     // router.push("/admin-view/add-product");
   };
 
   return isAdminView ? (
     <>
       <button
-        onClick={handleUpdate}
+        onClick={handleUpdateProduct}
         className="mt-1.5 flex w-full justify-center bg-black hover:bg-gray-600 px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
       >
         Update
