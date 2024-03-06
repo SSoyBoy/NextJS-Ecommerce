@@ -60,6 +60,7 @@ export default function ProductButton({ item }) {
   }
 
   const handleUpdate = () => {
+    console.log("item", item);
     setCurrentUpdatedProduct(item);
     console.log("currentUpdatedProduct", currentUpdatedProduct);
     router.push("/admin-view/add-product");
