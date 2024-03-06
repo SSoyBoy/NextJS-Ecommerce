@@ -78,8 +78,6 @@ export default function AdminAddNewProduct() {
     setCurrentUpdatedProduct,
   } = useContext(GlobalContext);
 
-  console.log("currentUpdatedProduct", currentUpdatedProduct);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -115,6 +113,8 @@ export default function AdminAddNewProduct() {
     });
   }
   const pathName = usePathname();
+
+  console.log("currentUpdatedProduct", currentUpdatedProduct);
   console.log("pathName", pathName);
   console.log("formData", formData);
 
