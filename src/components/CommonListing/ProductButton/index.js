@@ -58,10 +58,10 @@ export default function ProductButton({ item }) {
       setShowCartModal(true);
     }
   }
-  console.log("pathName", pathName);
 
   const handleUpdate = () => {
     setCurrentUpdatedProduct(item);
+    console.log("currentUpdatedProduct", currentUpdatedProduct);
     router.push("/admin-view/add-product");
   };
 

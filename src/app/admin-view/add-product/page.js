@@ -20,7 +20,7 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -79,14 +79,10 @@ export default function AdminAddNewProduct() {
   } = useContext(GlobalContext);
 
   const router = useRouter();
-  const pathName = usePathname();
-  console.log("pathName", pathName);
 
   useEffect(() => {
-    const test = currentUpdatedProduct;
-    console.log("test", test);
-    if (test !== null) setFormData(test);
-  }, [pathName, currentUpdatedProduct]);
+    if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct);
+  }, [currentUpdatedProduct]);
 
   async function handleImage(event) {
     const extractImageUrl = await helperForUPloadingImageToFirebase(
