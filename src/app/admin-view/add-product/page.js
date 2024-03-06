@@ -79,20 +79,14 @@ export default function AdminAddNewProduct() {
   } = useContext(GlobalContext);
 
   const router = useRouter();
+  const pathName = usePathname();
+  console.log("pathName", pathName);
 
   useEffect(() => {
-    if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct);
-  }, [currentUpdatedProduct]);
-
-  useEffect(() => {
-    if (
-      router.pathname === "/admin-view/add-product" &&
-      !currentUpdatedProduct
-    ) {
-      setCurrentUpdatedProduct(null);
-      setFormData(initialFormData);
-    }
-  }, [router.pathname, currentUpdatedProduct]);
+    const test = currentUpdatedProduct;
+    console.log("test", test);
+    if (test !== null) setFormData(test);
+  }, [pathName, currentUpdatedProduct]);
 
   async function handleImage(event) {
     const extractImageUrl = await helperForUPloadingImageToFirebase(
@@ -122,11 +116,6 @@ export default function AdminAddNewProduct() {
       sizes: cpySizes,
     });
   }
-  const pathName = usePathname();
-
-  console.log("currentUpdatedProduct", currentUpdatedProduct);
-  console.log("pathName", pathName);
-  console.log("formData", formData);
 
   async function handleAddProduct() {
     setComponentLevelLoader({ loading: true, id: "" });
