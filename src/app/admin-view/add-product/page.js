@@ -84,6 +84,16 @@ export default function AdminAddNewProduct() {
     if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct);
   }, [currentUpdatedProduct]);
 
+  useEffect(() => {
+    if (
+      router.pathname === "/admin-view/add-product" &&
+      !currentUpdatedProduct
+    ) {
+      setCurrentUpdatedProduct(null);
+      setFormData(initialFormData);
+    }
+  }, [router.pathname, currentUpdatedProduct]);
+
   async function handleImage(event) {
     const extractImageUrl = await helperForUPloadingImageToFirebase(
       event.target.files[0]

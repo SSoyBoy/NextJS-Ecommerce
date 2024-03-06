@@ -32,7 +32,7 @@ export default function GlobalState({ children }) {
     loading: false,
     id: "",
   });
-  const [currentUpdatedProduct, setCurrentUpdatedProduct] = useState("aaa");
+  const [currentUpdatedProduct, setCurrentUpdatedProduct] = useState(null);
   const [showCartModal, setShowCartModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
 

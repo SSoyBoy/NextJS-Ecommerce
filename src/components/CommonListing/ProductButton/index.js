@@ -5,7 +5,7 @@ import { GlobalContext } from "@/context";
 import { addToCart } from "@/services/cart";
 import { deleteAProduct } from "@/services/product";
 import { usePathname, useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 
 export default function ProductButton({ item }) {
@@ -61,11 +61,17 @@ export default function ProductButton({ item }) {
     console.log("res", res);
   }
 
+  useEffect(() => {
+    if (currentUpdatedProduct) {
+      router.push("/admin-view/add-product");
+    }
+  }, [currentUpdatedProduct]);
+
   const handleUpdate = () => {
     setCurrentUpdatedProduct(item);
     console.log("pathName", pathName);
     console.log("currentUpdatedProduct", currentUpdatedProduct);
-    router.push("/admin-view/add-product");
+    // router.push("/admin-view/add-product");
   };
 
   return isAdminView ? (
