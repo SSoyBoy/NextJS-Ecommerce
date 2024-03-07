@@ -121,8 +121,6 @@ export default function Navbar() {
     setCurrentUpdatedProduct,
     showCartModal,
     setShowCartModal,
-    test,
-    setTest,
   } = useContext(GlobalContext);
 
   const [showNav, setShowNav] = useState(false);
@@ -131,14 +129,25 @@ export default function Navbar() {
 
   const router = useRouter();
 
+  // useEffect(() => {
+  //   if (
+  //     pathName !== "/admin-view/add-product" &&
+  //     currentUpdatedProduct !== null
+  //   )
+  //     setCurrentUpdatedProduct(null);
+  // }, [pathName]);
   useEffect(() => {
-    console.log("pathName nav", pathName);
-    console.log("data", currentUpdatedProduct);
-    if (
-      pathName !== "/admin-view/add-product" &&
-      currentUpdatedProduct !== null
-    )
-      setCurrentUpdatedProduct(null);
+    const storedProduct = JSON.parse(
+      localStorage.getItem("currentUpdatedProduct")
+    );
+
+    if (storedProduct !== null) {
+      setCurrentUpdatedProduct(storedProduct);
+    }
+
+    if (pathName !== "/admin-view/add-product" && storedProduct !== null) {
+      localStorage.removeItem("currentUpdatedProduct");
+    }
   }, [pathName]);
 
   function handleLogout() {

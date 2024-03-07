@@ -76,19 +76,26 @@ export default function AdminAddNewProduct() {
     setComponentLevelLoader,
     currentUpdatedProduct,
     setCurrentUpdatedProduct,
-    test,
-    setTest,
   } = useContext(GlobalContext);
 
   const router = useRouter();
 
+  // useEffect(() => {
+  //   if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct);
+  // }, [currentUpdatedProduct]);
   useEffect(() => {
-    if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct);
-    if (test) setTest(test);
-  }, [currentUpdatedProduct, test]);
+    const storedProduct = JSON.parse(
+      localStorage.getItem("currentUpdatedProduct")
+    );
 
-  console.log("test add", test);
-  console.log("currentUpdatedProduct add", currentUpdatedProduct);
+    if (storedProduct !== null) {
+      setFormData(storedProduct);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("currentUpdatedProduct", JSON.stringify(formData));
+  }, [formData]);
 
   async function handleImage(event) {
     const extractImageUrl = await helperForUPloadingImageToFirebase(
@@ -119,19 +126,47 @@ export default function AdminAddNewProduct() {
     });
   }
 
+  // async function handleAddProduct() {
+  //   setComponentLevelLoader({ loading: true, id: "" });
+  //   const res =
+  //     currentUpdatedProduct !== null
+  //       ? await updateAProduct(formData)
+  //       : await addNewProduct(formData);
+  //   if (res.success) {
+  //     setComponentLevelLoader({ loading: false, id: "" });
+  //     toast.success(res.message, {
+  //       position: toast.POSITION.TOP_RIGHT,
+  //     });
+  //     setFormData(initialFormData);
+  //     setCurrentUpdatedProduct(null);
+  //     setTimeout(() => {
+  //       router.push("/admin-view/all-products");
+  //     }, 1000);
+  //   } else {
+  //     toast.success(res.error, {
+  //       position: toast.POSITION.TOP_RIGHT,
+  //     });
+  //     setComponentLevelLoader({ loading: false, id: "" });
+  //     setFormData(initialFormData);
+  //   }
+  // }
   async function handleAddProduct() {
     setComponentLevelLoader({ loading: true, id: "" });
-    const res =
-      currentUpdatedProduct !== null
-        ? await updateAProduct(formData)
-        : await addNewProduct(formData);
+
+    const res = formData._id
+      ? await updateAProduct(formData)
+      : await addNewProduct(formData);
+
     if (res.success) {
       setComponentLevelLoader({ loading: false, id: "" });
       toast.success(res.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
       setFormData(initialFormData);
-      setCurrentUpdatedProduct(null);
+
+      // Clear the stored product from Local Storage after successful update/add
+      localStorage.removeItem("currentUpdatedProduct");
+
       setTimeout(() => {
         router.push("/admin-view/all-products");
       }, 1000);
@@ -143,6 +178,8 @@ export default function AdminAddNewProduct() {
       setFormData(initialFormData);
     }
   }
+
+  console.log("formdata", formData);
 
   return (
     <div className="w-full mt-5 mr-0 mb-0 ml-0 relative">
@@ -200,15 +237,11 @@ export default function AdminAddNewProduct() {
           >
             {componentLevelLoader && componentLevelLoader.loading ? (
               <ComponentLevelLoader
-                text={
-                  currentUpdatedProduct !== null
-                    ? "Updating Product"
-                    : "Adding Product"
-                }
+                text={formData._id ? "Updating Product" : "Adding Product"}
                 color={"#ffffff"}
                 loading={componentLevelLoader && componentLevelLoader.loading}
               />
-            ) : currentUpdatedProduct !== null ? (
+            ) : formData._id ? (
               "Update Product"
             ) : (
               "Add Product"

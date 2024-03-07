@@ -19,8 +19,6 @@ export default function ProductButton({ item }) {
     showCartModal,
     setShowCartModal,
     currentUpdatedProduct,
-    test,
-    setTest,
   } = useContext(GlobalContext);
   const router = useRouter();
 
@@ -61,12 +59,12 @@ export default function ProductButton({ item }) {
     }
   }
 
+  // const handleUpdate = () => {
+  //   setCurrentUpdatedProduct(item);
+  //   router.push("/admin-view/add-product");
+  // };
   const handleUpdate = () => {
-    console.log("item", item);
-    setCurrentUpdatedProduct(item);
-    setTest(item);
-    console.log("currentUpdatedProduct", currentUpdatedProduct);
-    console.log("test", test);
+    localStorage.setItem("currentUpdatedProduct", JSON.stringify(item));
     router.push("/admin-view/add-product");
   };
 
