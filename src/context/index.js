@@ -33,6 +33,9 @@ export default function GlobalState({ children }) {
     id: "",
   });
   const [currentUpdatedProduct, setCurrentUpdatedProduct] = useState(null);
+
+  const [test, setTest] = useState(null);
+
   const [showCartModal, setShowCartModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
 
@@ -124,6 +127,8 @@ export default function GlobalState({ children }) {
         setOrderDetails,
         allOrdersForAllUsers,
         setAllOrdersForAllUsers,
+        test,
+        setTest,
       }}
     >
       {children}

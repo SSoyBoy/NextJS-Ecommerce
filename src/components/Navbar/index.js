@@ -121,6 +121,8 @@ export default function Navbar() {
     setCurrentUpdatedProduct,
     showCartModal,
     setShowCartModal,
+    test,
+    setTest,
   } = useContext(GlobalContext);
 
   const [showNav, setShowNav] = useState(false);

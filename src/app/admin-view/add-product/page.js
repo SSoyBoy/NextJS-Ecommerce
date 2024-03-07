@@ -76,13 +76,19 @@ export default function AdminAddNewProduct() {
     setComponentLevelLoader,
     currentUpdatedProduct,
     setCurrentUpdatedProduct,
+    test,
+    setTest,
   } = useContext(GlobalContext);
 
   const router = useRouter();
 
   useEffect(() => {
     if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct);
-  }, [currentUpdatedProduct]);
+    if (test) setTest(test);
+  }, [currentUpdatedProduct, test]);
+
+  console.log("test add", test);
+  console.log("currentUpdatedProduct add", currentUpdatedProduct);
 
   async function handleImage(event) {
     const extractImageUrl = await helperForUPloadingImageToFirebase(
