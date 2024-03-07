@@ -32,8 +32,6 @@ export default function Checkout() {
     "pk_test_51OWb9zF5MvfNg23fu3wv7EKMtZK7sfF5zyn0TtJXZBUN8B0PPuk5iv3jhWtRFzWnrEtCDoETVexTi3j3f4Ziyqmu00QcwQj0PT";
   const stripePromise = loadStripe(publishableKey);
 
-  console.log("cartItems<<<<<<<<<<", cartItems);
-
   async function getAllAddresses() {
     const res = await fetchAllAddresses(user?._id);
 
