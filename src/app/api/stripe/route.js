@@ -8,6 +8,7 @@ const stripe = require("stripe")(
 export const dynamic = "force-dynamic";
 
 export async function POST(req) {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   try {
     const isAuthUser = await AuthUser(req);
     if (isAuthUser) {
@@ -17,8 +18,8 @@ export async function POST(req) {
         payment_method_types: ["card"],
         line_items: res,
         mode: "payment",
-        success_url: "http://localhost:3000/checkout" + "?status=success",
-        cancel_url: "http://localhost:3000/checkout" + "?status=cancel",
+        success_url: `${apiUrl}/checkout` + "?status=success",
+        cancel_url: `${apiUrl}/checkout` + "?status=cancel",
       });
 
       return NextResponse.json({
