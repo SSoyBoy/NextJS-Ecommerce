@@ -25,26 +25,34 @@ export default function Home() {
   }, []);
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const slidesToShow = 2;
   const totalSlides = products.length;
 
   const goToPrevious = () => {
-    const newGroupIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-    setCurrentIndex(newGroupIndex);
+    setCurrentIndex((prevIndex) => {
+      if (prevIndex === 0) {
+        return totalSlides - 2;
+      } else {
+        return prevIndex - 1;
+      }
+    });
   };
 
   const goToNext = () => {
-    const newGroupIndex = (currentIndex + 1) % totalSlides;
-    setCurrentIndex(newGroupIndex);
+    setCurrentIndex((prevIndex) => {
+      if (prevIndex === totalSlides - 2) {
+        return 0;
+      } else {
+        return prevIndex + 1;
+      }
+    });
   };
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      const newGroupIndex = (currentIndex + 1) % totalSlides;
-      setCurrentIndex(newGroupIndex);
+    const interval = setInterval(() => {
+      goToNext();
     }, 5000);
 
-    return () => clearTimeout(timeoutId);
-  }, [currentIndex, totalSlides]);
+    return () => clearInterval(interval);
+  }, [currentIndex]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-5 sm:p-10 md:p-20">
@@ -94,51 +102,54 @@ export default function Home() {
             <div className="lg:col-span-2 lg:py-8 relative">
               <div
                 onClick={goToPrevious}
-                className="absolute top-1/2  left-4 md:left-6 text-2xl md:text-3xl hover:text-gray-800 text-white cursor-pointer"
+                className="absolute top-1/2 z-10 select-none left-4 md:left-6 text-2xl md:text-3xl hover:text-gray-800 text-white cursor-pointer"
               >
                 ❰
               </div>
               <div
                 onClick={goToNext}
-                className="absolute top-1/2  right-4 md:right-6 text-2xl md:text-3xl hover:text-gray-800 text-white cursor-pointer"
+                className="absolute top-1/2 z-10 select-none right-4 md:right-6 text-2xl md:text-3xl hover:text-gray-800 text-white cursor-pointer"
               >
                 ❱
               </div>
               {products && products.length > 0 ? (
-                <ul className="grid grid-cols-2 gap-4">
-                  {Array.from({ length: slidesToShow }).map((_, index) => {
-                    const slideIndex = (currentIndex + index) % totalSlides;
-                    return (
-                      <div>
-                        <li
-                          onClick={() =>
-                            router.push(`/product/${products[slideIndex]._id}`)
-                          }
-                          className="cursor-pointer"
-                          key={products[slideIndex]?._id}
+                <div className=" relative w-full mx-auto overflow-hidden">
+                  <div
+                    className=" flex w-full transition-transform duration-500"
+                    style={{ transform: `translateX(-${currentIndex * 50}%)` }}
+                  >
+                    {products.map((product, index) => {
+                      return (
+                        <div
+                          onClick={() => router.push(`/product/${product._id}`)}
+                          key={product?._id}
+                          className={`w-1/2 flex-none px-1 cursor-pointer`}
                         >
                           <div>
                             <img
-                              key={slideIndex}
-                              src={products[slideIndex]?.imageUrl}
+                              key={index}
+                              src={product?.imageUrl}
                               alt={`Sale Product Item ${index}`}
-                              className="object-cover object-center w-full min-h-40 rounded aspect-square"
+                              className="object-cover object-center w-full rounded aspect-square"
                             />
                           </div>
                           <div className="mt-3">
-                            <h3 className="font-medium text-gray-900">
-                              {products[slideIndex]?.name}
+                            <h3
+                              className="font-medium truncate
+                             text-gray-900"
+                            >
+                              {product?.name}
                             </h3>
                             <p className="mt-1 text-sm text-gray-800">
-                              ${products[slideIndex]?.price}{" "}
-                              <span className="text-red-700">{`(-${products[slideIndex]?.priceDrop}%) Off`}</span>
+                              ${product?.price}{" "}
+                              <span className="text-red-700">{`(-${product?.priceDrop}%) Off`}</span>
                             </p>
                           </div>
-                        </li>
-                      </div>
-                    );
-                  })}
-                </ul>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               ) : null}
             </div>
           </div>

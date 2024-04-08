@@ -46,7 +46,9 @@ export default function CommonModal({
                           <Dialog.Title>{modalTitle}</Dialog.Title>
                         </div>
                       ) : null}
-                      <div className="mt-20">{mainContent}</div>
+                      <div className="mt-20 md:mt-32 lg:mt-20">
+                        {mainContent}
+                      </div>
                     </div>
                     {showButtons ? (
                       <div className="border-none px-4 py-6 sm:px-6">
