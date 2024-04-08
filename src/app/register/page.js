@@ -38,6 +38,11 @@ export default function Register() {
       ? true
       : false;
   }
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter" && isFormValid()) {
+      handleRegisterOnSubmit();
+    }
+  };
 
   async function handleRegisterOnSubmit() {
     setPageLevelLoader(true);
@@ -98,6 +103,7 @@ export default function Register() {
                           });
                         }}
                         value={formData[controlItem.id]}
+                        onKeyDown={handleKeyPress}
                       />
                     ) : controlItem.componentType === "select" ? (
                       <SelectComponent

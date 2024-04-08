@@ -39,6 +39,12 @@ export default function Login() {
       : false;
   }
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter" && isValidForm()) {
+      handleLogin();
+    }
+  };
+
   async function handleLogin() {
     setComponentLevelLoader({ loading: true, id: "" });
     const res = await login(formData);
@@ -90,6 +96,7 @@ export default function Login() {
                           [controlItem.id]: event.target.value,
                         });
                       }}
+                      onKeyDown={handleKeyPress}
                     />
                   ) : null
                 )}
