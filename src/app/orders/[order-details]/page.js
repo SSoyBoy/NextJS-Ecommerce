@@ -94,8 +94,12 @@ export default function OrderDetails() {
                           {item && item.product && item.product.name}
                         </h3>
                       </div>
-                      <div className="w-full flex justify-between items-start space-x-8">
-                        <h3 className="text-xl font-semibold leading-6 text-gray-900">
+                      <div className="w-full flex md:justify-center items-center space-x-8 text-md font-semibold leading-6 text-gray-700">
+                        <p>Quantity: </p>
+                        <h3 className="!ml-3">{item && item.qty}</h3>
+                      </div>
+                      <div className="w-full flex items-start space-x-8">
+                        <h3 className="text-xl font-semibold leading-6 text-red-500">
                           ${item && item.product && item.product.price}
                         </h3>
                       </div>
